@@ -51,7 +51,7 @@ class MaskedReshape(Reshape):
         return K.reshape(mask, (-1,) + target_mask_shape)
 
 if __name__ == "__main__":
-    print "deneme"
+    print("deneme")
 
     max_sentence_length = 5
     max_word_root_length = 4
@@ -82,7 +82,7 @@ if __name__ == "__main__":
         # input_4d = Lambda(lambda x: x, output_shape=lambda s: s)(input_4d)
         rr = r(input_4d)
         input_embeddings = embedding_layer(rr)
-        print input_embeddings
+        print(input_embeddings)
         r = MaskedReshape(
             (max_sentence_length * max_n_analyses, max_word_root_length, embedding_dim),
             (max_sentence_length * max_n_analyses, max_word_root_length))
@@ -95,11 +95,11 @@ if __name__ == "__main__":
 
         lstm_layer_output = td_lstm_layer(rr)
         lstm_layer_output_relu = Activation('relu')(lstm_layer_output)
-        print "lstm_layer_output_relu", lstm_layer_output_relu
+        print("lstm_layer_output_relu", lstm_layer_output_relu)
         r = Reshape((max_sentence_length, max_n_analyses, 2 * lstm_dim))
         lstm_layer_output_relu = Lambda(lambda x: x, output_shape=lambda s: s)(lstm_layer_output_relu)
         lstm_layer_output_relu_reshaped = r(lstm_layer_output_relu)
-        print "lstm_layer_output_relu_reshaped", lstm_layer_output_relu_reshaped
+        print("lstm_layer_output_relu_reshaped", lstm_layer_output_relu_reshaped)
         return input_embeddings, lstm_layer_output_relu_reshaped
 
     input_char_embeddings, char_lstm_layer_output = \
@@ -118,17 +118,17 @@ if __name__ == "__main__":
             [-1, max_sentence_length]), max_n_analyses),
                                          axis=0)
 
-    print sample_correct_tags
+    print(sample_correct_tags)
 
     sample_input = [np.random.randint(0, char_vocabulary_size + 1,
                                       max_sentence_length * max_n_analyses * max_word_root_length)
         .reshape([-1, max_sentence_length, max_n_analyses, max_word_root_length])]
 
-    print sample_input
-    print sample_input[0].shape
+    print(sample_input)
+    print(sample_input[0].shape)
 
     outputs = model.predict(sample_input, batch_size=1)
 
-    print outputs
+    print(outputs)
 
     # model.fit(sample_input, [sample_correct_tags, sample_correct_tags], batch_size=1, epochs=10)

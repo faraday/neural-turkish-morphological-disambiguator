@@ -45,7 +45,7 @@ class Params():
 params = Params()
 
 def dot_product_over_specific_axis(inputs):
-    print "INPUTS TO LAMBDA:", inputs
+    print("INPUTS TO LAMBDA:", inputs)
     x = inputs[0]
     # x [?, 5, 10, 14]
     y = inputs[1]
@@ -72,7 +72,7 @@ def create_context_bi_lstm(input_3d, embedding_layer,
     r = Reshape((max_sentence_length * max_surface_form_length,))
     rr = r(input_3d)
     input_embeddings = embedding_layer(rr)
-    print input_embeddings
+    print(input_embeddings)
     # input_embeddings = Lambda(lambda x: x, output_shape=lambda s: s)(input_embeddings)
     r = MaskedReshape((max_sentence_length, max_surface_form_length, embedding_dim),
                       (max_sentence_length, max_surface_form_length))
@@ -83,7 +83,7 @@ def create_context_bi_lstm(input_3d, embedding_layer,
                                          input_shape=(max_surface_form_length, embedding_dim))
 
     char_bi_lstm_outputs = td_lstm_layer(rr)
-    print "char_bi_lstm_outputs", char_bi_lstm_outputs
+    print("char_bi_lstm_outputs", char_bi_lstm_outputs)
 
     sentence_level_lstm_layer = Bidirectional(LSTM(sentence_level_lstm_dim,
                                                    input_shape=(max_sentence_length, 2 * lstm_dim),
@@ -97,8 +97,8 @@ def create_context_bi_lstm(input_3d, embedding_layer,
     sentence_level_bi_lstm_outputs = sentence_level_lstm_layer(char_bi_lstm_outputs)
     sentence_level_bi_lstm_outputs_tanh = Activation('tanh')(sentence_level_bi_lstm_outputs)
 
-    print "sentence_level_bi_lstm_outputs", sentence_level_bi_lstm_outputs
-    print "sentence_level_bi_lstm_outputs_tanh", sentence_level_bi_lstm_outputs_tanh
+    print("sentence_level_bi_lstm_outputs", sentence_level_bi_lstm_outputs)
+    print("sentence_level_bi_lstm_outputs_tanh", sentence_level_bi_lstm_outputs_tanh)
 
     return sentence_level_bi_lstm_outputs_tanh
 
@@ -114,7 +114,7 @@ def create_two_level_bi_lstm(input_4d, embedding_layer,
     rr = r(input_4d)
     input_embeddings = embedding_layer(rr)
     if not silent:
-        print input_embeddings
+        print(input_embeddings)
     if masked:
         r = MaskedReshape((max_sentence_length * max_n_analyses, max_word_root_length, embedding_dim),
                           (max_sentence_length * max_n_analyses, max_word_root_length))
@@ -131,12 +131,12 @@ def create_two_level_bi_lstm(input_4d, embedding_layer,
     lstm_layer_output = td_lstm_layer(rr)
     lstm_layer_output_relu = Activation('relu')(lstm_layer_output)
     if not silent:
-        print "lstm_layer_output_relu", lstm_layer_output_relu
+        print("lstm_layer_output_relu", lstm_layer_output_relu)
     r = Reshape((max_sentence_length, max_n_analyses, 2 * lstm_dim))
     lstm_layer_output_relu = Lambda(lambda x: x, output_shape=lambda s: s)(lstm_layer_output_relu)
     lstm_layer_output_relu_reshaped = r(lstm_layer_output_relu)
     if not silent:
-        print "lstm_layer_output_relu_reshaped", lstm_layer_output_relu_reshaped
+        print("lstm_layer_output_relu_reshaped", lstm_layer_output_relu_reshaped)
     return input_embeddings, lstm_layer_output_relu_reshaped
 
 
@@ -170,7 +170,7 @@ def build_model(params=Params()):
     #                                   dtype='int32',
     #                                   name='correct_tag_input')
 
-    print sentences_word_root_input
+    print(sentences_word_root_input)
 
 
 
@@ -185,19 +185,19 @@ def build_model(params=Params()):
                                  params.max_sentence_length, params.max_n_analyses, params.max_analysis_length,
                                  params.tag_lstm_dim, params.tag_embedding_dim)
 
-    print "char_lstm_layer_output", char_lstm_layer_output
+    print("char_lstm_layer_output", char_lstm_layer_output)
 
     added_root_and_analysis_embeddings = Add()([char_lstm_layer_output, tag_lstm_layer_output])
     R_matrix = Activation('tanh')(added_root_and_analysis_embeddings)
     # (None, max_sentence_length, max_n_analyses, 2*char_lstm_dim)
 
-    print "R_matrix", R_matrix
+    print("R_matrix", R_matrix)
 
     h = create_context_bi_lstm(surface_form_input, char_embedding_layer,
                                params.max_sentence_length, params.max_surface_form_length,
                                params.char_lstm_dim, params.char_embedding_dim, params.sentence_level_lstm_dim)
 
-    print "h", h
+    print("h", h)
 
     ll = Lambda(dot_product_over_specific_axis,
                 output_shape=fabricate_calc_output_shape(params.max_sentence_length, params.max_n_analyses))
@@ -205,7 +205,7 @@ def build_model(params=Params()):
     # compute h
     p = Activation('softmax', name="p")(ll([R_matrix, h]))
 
-    print "p", p
+    print("p", p)
 
     predicted_tags = Lambda(lambda x: K.max(x, axis=2), output_shape=lambda s: s)(p)
 
@@ -225,7 +225,7 @@ if __name__ == "__main__":
     sample_correct_tags = np.expand_dims(to_categorical(np.random.randint(0, params.max_n_analyses, params.max_sentence_length).reshape([-1, params.max_sentence_length]), params.max_n_analyses),
                                          axis=0)
 
-    print sample_correct_tags
+    print(sample_correct_tags)
 
     sample_input = [np.random.randint(0, params.char_vocabulary_size+1, params.max_sentence_length *  params.max_n_analyses * params.max_word_root_length).reshape([-1, params.max_sentence_length, params.max_n_analyses, params.max_word_root_length]), \
                     np.random.randint(0, params.tag_vocabulary_size+1, params.max_sentence_length * params.max_n_analyses * params.max_analysis_length).reshape([-1, params.max_sentence_length, params.max_n_analyses, params.max_analysis_length]), \
@@ -236,11 +236,11 @@ if __name__ == "__main__":
 
     p_pred = model.predict(sample_input)
 
-    print p_pred
+    print(p_pred)
 
     # p, _ = model.predict(sample_input)
-    # print p
-    # print p[0].shape
+    # print(p
+    # print(p[0].shape
 
     #
     # model.fit()

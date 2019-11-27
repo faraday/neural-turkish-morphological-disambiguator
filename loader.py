@@ -65,9 +65,9 @@ def read_datafile(train_path, test_path=None, sentence_length_limit=66, preloade
                 line = line.strip("\n")
                 while line:
                     tokens = line.split(" ")
-                    surface_form = tokens[0].decode('utf-8')
+                    surface_form = tokens[0]
                     encode_label('surface_form', surface_form)
-                    analyses = [t.decode('utf-8') for t in tokens[1:]]
+                    analyses = [t for t in tokens[1:]]
                     if surface_form in ["<DOC>", "<TITLE>", "</DOC>", "</TITLE>"]:
                         pass # do nothing, skip line
                     elif surface_form == "<S>":
@@ -75,7 +75,7 @@ def read_datafile(train_path, test_path=None, sentence_length_limit=66, preloade
                     elif surface_form == "</S>":
                         # record the sentence
                         if len(sentence) == 0:
-                            print "sentence with length 0? %s %s" % (path, str(sentence))
+                            print("sentence with length 0? %s %s" % (path, str(sentence)))
                             line = f.readline()
                             continue
                         if len(sentence) > sentence_length_limit:
@@ -132,7 +132,7 @@ def read_datafile(train_path, test_path=None, sentence_length_limit=66, preloade
                     line = f.readline()
                     line = line.strip("\n")
                 train_and_test_sentences.append(sentences)
-                print "file processed"
+                print("file processed")
 
     for c in characters_seen:
         encode_label("character", c)
@@ -206,10 +206,10 @@ def encode_sentence(sentence, label2ids):
 if __name__ == "__main__":
     sentences, label2ids = read_datafile("sample.data")
     encode_sentence(sentences[0][0], label2ids)
-    print sentences[0]
-    print label2ids
+    print(sentences[0])
+    print(label2ids)
 
     sentences, label2ids = read_datafile("data/train.merge.utf8", "data/test.merge.utf8")
     encode_sentence(sentences[0][0], label2ids)
-    print sentences[0]
-    print label2ids
+    print(sentences[0])
+    print(label2ids)

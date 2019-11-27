@@ -1,5 +1,5 @@
 import argparse
-import cPickle
+import _pickle as cPickle
 import codecs
 import os
 import sys
@@ -43,11 +43,11 @@ def sample_generator(sentences, label2ids, batch_size=32, return_sentence=False)
             input_array = []
             for array in [sentences_word_root_input, sentences_analysis_input, surface_form_input,
                           correct_tags_input]:
-                # print array.shape
-                # print array.reshape([-1] + list(array.shape)).shape
+                # print(array.shape
+                # print(array.reshape([-1] + list(array.shape)).shape
                 input_array += [np.expand_dims(np.copy(array), axis=0)]
-                # print array.shape
-                # print np.expand_dims(array, axis=0).shape
+                # print(array.shape
+                # print(np.expand_dims(array, axis=0).shape
 
             batch[0].append(input_array[:-1])
             batch[1].append([input_array[-1]])
@@ -56,8 +56,8 @@ def sample_generator(sentences, label2ids, batch_size=32, return_sentence=False)
                 # yield np.concatenate(batch[0], axis=0), np.concatenate(batch[1], axis=0)
                 # for b in batch[1]:
                 #     for i in range(1):
-                #         print i
-                #         print b[i].shape
+                #         print(i
+                #         print(b[i].shape
                 encoded_sentences_in_batch = ([np.concatenate([b[i] for b in batch[0]], axis=0) for i in range(3)], \
                           [np.concatenate([b[0] for b in batch[1]], axis=0)])
                 if not return_sentence:
@@ -128,17 +128,17 @@ def disambiguate_single_line_sentence(line, model, label2ids, params, print_pred
     :param print_prediction_lines: 
     :return: An array of strings which represent the words and disambiguated analyzes
     """
-    string_output = get_morph_analyzes(line)# print "XXX", string_output, "YYY"
+    string_output = get_morph_analyzes(line)# print("XXX", string_output, "YYY"
     analyzer_output_string = create_single_word_single_line_format(string_output)
-    # print string_output_single_line.decode("iso-8859-9")
-    # print type(string_output_single_line)
+    # print(string_output_single_line.decode("iso-8859-9")
+    # print(type(string_output_single_line)
     fd, f_path = tempfile.mkstemp()
     with codecs.open(f_path, "w", encoding="utf8") as f:
         f.write(analyzer_output_string.decode("iso-8859-9"))
     os.close(fd)
-    # print f_path
+    # print(f_path
     train_and_test_sentences, _ = read_datafile(f_path, f_path, preloaded_label2ids=label2ids)
-    # print train_and_test_sentences[1]
+    # print(train_and_test_sentences[1]
     sample_batch, decoded_sample_batch = iter(sample_generator(train_and_test_sentences[1],
                              label2ids,
                              batch_size=params.batch_size,
@@ -151,26 +151,26 @@ def disambiguate_single_line_sentence(line, model, label2ids, params, print_pred
     pred_probs = model.predict(sample_batch[0], batch_size=params.batch_size, verbose=1)
 
     pred_tags = np.argmax(pred_probs[0], axis=1)
-    # print pred_tags
+    # print(pred_tags
 
     first_sentence = decoded_sample_batch[0][0]
     first_shuffled_positions = decoded_sample_batch[0][1]
 
     sentence_length = len(first_sentence['roots'])
-    # print sentence_length
+    # print(sentence_length
 
     pred_probs_copy = np.copy(pred_probs)
 
     for row_idx, first_shuffled_positions_row in enumerate(first_shuffled_positions):
-        # print pred_probs_copy[0, row_idx]
-        # print first_shuffled_positions_row
+        # print(pred_probs_copy[0, row_idx]
+        # print(first_shuffled_positions_row
         for col_idx, first_shuffled_position in enumerate(first_shuffled_positions_row):
             pred_probs_copy[0, row_idx, first_shuffled_position] = pred_probs[
                 0, row_idx, col_idx]
-            # print pred_probs_copy[0, row_idx]
+            # print(pred_probs_copy[0, row_idx]
 
     pred_tags = np.argmax(pred_probs_copy[0], axis=1)
-    # print pred_tags
+    # print(pred_tags
     prediction_lines = [
         first_sentence['surface_forms'][word_idx] + " " + first_sentence['roots'][word_idx][
             pred_tag] + "+" + "+".join(first_sentence['morph_tokens'][word_idx][pred_tag]) for
@@ -182,11 +182,11 @@ def disambiguate_single_line_sentence(line, model, label2ids, params, print_pred
         word_idx, pred_tag in enumerate(pred_tags[:sentence_length])]
 
     if print_prediction_lines:
-        print "\n".join(prediction_lines)
-        print ""
+        print("\n".join(prediction_lines))
+        print("")
         return prediction_lines
     else:
-        print [type(x) for x in prediction_lines]
+        print([type(x) for x in prediction_lines])
         return analyzer_output_string, prediction_lines, prediction_lines_raw
 
 
@@ -269,7 +269,7 @@ if __name__ == "__main__":
                             validation_steps=len(train_and_test_sentences[1])/params.batch_size+1,
                             callbacks=[checkpointer, tensorboard_callback, reduce_lr])
 
-        print "Saving"
+        print("Saving")
         model.save("./models/ntd-{run_name}-final.hdf5".format(run_name=args.run_name))
         # model.evaluate()
 
@@ -304,17 +304,17 @@ if __name__ == "__main__":
                                                                    label2ids,
                                                                    batch_size=params.batch_size,
                                                                    return_sentence=True)):
-            # print sample
+            # print(sample
             # pred_probs = model.predict(sample_batch[0], batch_size=params.batch_size, verbose=1)
-            # print pred_probs
-            # print pred_probs.shape
-            # print np.argmax(pred_probs, axis=2)
-            # print sample_batch[1][0]
-            # print sample_batch[1][0].shape
-            # print np.argmax(sample_batch[1][0], axis=2)
-            # print decoded_sample_batch
+            # print(pred_probs
+            # print(pred_probs.shape
+            # print(np.argmax(pred_probs, axis=2)
+            # print(sample_batch[1][0]
+            # print(sample_batch[1][0].shape
+            # print(np.argmax(sample_batch[1][0], axis=2)
+            # print(decoded_sample_batch
 
-            # print "decoded_sample_batch: ", decoded_sample_batch
+            # print("decoded_sample_batch: ", decoded_sample_batch
 
             correct_tags = np.argmax(sample_batch[1][0], axis=2)
             pred_probs = model.predict(sample_batch[0], batch_size=params.batch_size, verbose=1)
@@ -324,17 +324,17 @@ if __name__ == "__main__":
 
                 sentence_length = len(decoded_sample_batch[idx][0]['surface_form_lengths'])
                 pred_tag = pred_tags[idx]
-                # print correct_tag
-                # print correct_tag.shape
-                # print pred_tag
-                # print pred_tag.shape
+                # print(correct_tag
+                # print(correct_tag.shape
+                # print(pred_tag
+                # print(pred_tag.shape
                 n_correct = np.sum(correct_tag[:sentence_length] == pred_tag[:sentence_length])
                 total_correct += n_correct
                 total_tokens += sentence_length
-                # print "sentence_length: ", sentence_length
+                # print("sentence_length: ", sentence_length
 
-                # print "n_correct: ", n_correct
-                # print "sentence_length: ", sentence_length
+                # print("n_correct: ", n_correct
+                # print("sentence_length: ", sentence_length
 
                 total_correct_all_structure += n_correct + correct_tag.shape[0] - sentence_length
                 total_tokens_all_structure += correct_tag.shape[0]
@@ -347,7 +347,7 @@ if __name__ == "__main__":
                         break
                     n_analyses = len(decoded_sample_batch[idx][0]['roots'][j])
                     baseline_log_prob += math.log(1/float(n_analyses))
-                    # print n_analyses
+                    # print(n_analyses
                     assert n_analyses >= 1
                     if n_analyses > 1:
                         if correct_tag[j] == pred_tag[j]:
@@ -358,42 +358,42 @@ if __name__ == "__main__":
 
 
             if batch_idx % 100 == 0:
-                print "only the filled part of the sentence"
-                print total_correct
-                print total_tokens
-                print float(total_correct)/total_tokens
-                print "all the sentence"
-                print total_correct_all_structure
-                print total_tokens_all_structure
-                print float(total_correct_all_structure)/total_tokens_all_structure
-                print "==="
-                print "ambigous"
-                print total_correct_ambigious
-                print total_tokens_ambigious
-                print float(total_correct_ambigious)/total_tokens_ambigious
-                print "==="
+                print("only the filled part of the sentence")
+                print(total_correct)
+                print(total_tokens)
+                print(float(total_correct)/total_tokens)
+                print("all the sentence")
+                print(total_correct_all_structure)
+                print(total_tokens_all_structure)
+                print(float(total_correct_all_structure)/total_tokens_all_structure)
+                print("===")
+                print("ambigous")
+                print(total_correct_ambigious)
+                print(total_tokens_ambigious)
+                print(float(total_correct_ambigious)/total_tokens_ambigious)
+                print("===")
                 for key in correct_counts:
-                    print "disambiguations out of n_analyses: %d ===> %lf" % (key, float(correct_counts[key])/total_counts[key])
-                print "==="
+                    print("disambiguations out of n_analyses: %d ===> %lf" % (key, float(correct_counts[key])/total_counts[key]))
+                print("===")
             if batch_idx*params.batch_size >= len(train_and_test_sentences[1]):
-                print "Evaluation finished, batch_id: %d" % batch_idx
-                print "only the filled part of the sentence"
-                print total_correct
-                print total_tokens
-                print float(total_correct)/total_tokens
-                print "all the sentence"
-                print total_correct_all_structure
-                print total_tokens_all_structure
-                print float(total_correct_all_structure) / total_tokens_all_structure
-                print "==="
-                print "ambigous"
-                print total_correct_ambigious
-                print total_tokens_ambigious
-                print float(total_correct_ambigious)/total_tokens_ambigious
-                print "==="
+                print("Evaluation finished, batch_id: %d" % batch_idx)
+                print("only the filled part of the sentence")
+                print(total_correct)
+                print(total_tokens)
+                print(float(total_correct)/total_tokens)
+                print("all the sentence")
+                print(total_correct_all_structure)
+                print(total_tokens_all_structure)
+                print(float(total_correct_all_structure) / total_tokens_all_structure)
+                print("===")
+                print("ambigous")
+                print(total_correct_ambigious)
+                print(total_tokens_ambigious)
+                print(float(total_correct_ambigious)/total_tokens_ambigious)
+                print("===")
                 for key in correct_counts:
-                    print "disambiguations out of n_analyses: %d ===> %lf %d %d" % (key, float(correct_counts[key])/total_counts[key], correct_counts[key], total_counts[key])
-                print "==="
+                    print("disambiguations out of n_analyses: %d ===> %lf %d %d" % (key, float(correct_counts[key])/total_counts[key], correct_counts[key], total_counts[key]))
+                print("===")
                 break
     elif args.command == "disambiguate":
 
