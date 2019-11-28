@@ -104,7 +104,7 @@ def create_params(label2ids):
     params.max_sentence_length = label2ids['max_sentence_length']
     params.max_n_analyses = label2ids['max_n_analysis']
     params.batch_size = 1
-    params.n_subepochs = 40
+    params.n_subepochs = 1
     params.max_surface_form_length = label2ids['max_surface_form_length']
     params.max_word_root_length = label2ids['max_word_root_length']
     params.max_analysis_length = label2ids['max_analysis_length']
@@ -214,7 +214,7 @@ if __name__ == "__main__":
         params.max_n_analyses = label2ids['max_n_analysis']
 
         params.batch_size = 1
-        params.n_subepochs = 40
+        params.n_subepochs = 1
 
         params.max_surface_form_length = label2ids['max_surface_form_length']
         params.max_word_root_length = label2ids['max_word_root_length']
@@ -264,7 +264,7 @@ if __name__ == "__main__":
                                       min_lr=0)
         model.fit_generator(sample_generator(train_and_test_sentences[0], label2ids, batch_size=params.batch_size),
                             steps_per_epoch=len(train_and_test_sentences[0])/params.batch_size/params.n_subepochs,
-                            epochs=10*params.n_subepochs,
+                            epochs=1*params.n_subepochs,
                             validation_data=sample_generator(train_and_test_sentences[1], label2ids, batch_size=params.batch_size),
                             validation_steps=len(train_and_test_sentences[1])/params.batch_size+1,
                             callbacks=[checkpointer, tensorboard_callback, reduce_lr])
