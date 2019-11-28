@@ -242,7 +242,7 @@ if __name__ == "__main__":
         from keras.callbacks import ModelCheckpoint, TensorBoard, ReduceLROnPlateau
 
         checkpointer = ModelCheckpoint(filepath="./models/ntd-{run_name}".format(run_name=args.run_name)
-                                                + '.epoch-{epoch:02d}-val_acc-{val_acc:.5f}.hdf5',
+                                                + '.epoch-{epoch:02d}-val_acc-{val_accuracy:.5f}.hdf5',
                                        verbose=1,
                                        monitor="val_acc",
                                        save_best_only=True)
@@ -250,7 +250,7 @@ if __name__ == "__main__":
                     histogram_freq=1,
                     write_graph=True,
                     write_images=True,
-                    embeddings_freq=1,
+                    #embeddings_freq=1,
                     embeddings_layer_names=None,
                     embeddings_metadata={'char_embedding_layer': 'char_embedding_layer.tsv',
                                          'tag_embedding_layer': 'tag_embedding_layer.tsv'})
