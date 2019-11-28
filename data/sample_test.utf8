@@ -1,0 +1,77 @@
+<DOC> <DOC>+BDTag
+<TITLE> <TITLE>+BTTag
+<S> <S>+BSTag
+Hazine hazine+Noun+A3sg+Pnon+Nom hazin+Adj^DB+Noun+Zero+A3sg+Pnon+Dat Hazine+Noun+Prop+A3sg+Pnon+Nom
+Merkez'i Merkez+Noun+Prop+A3sg+Pnon+Acc Merkez+Noun+Prop+A3sg+P3sg+Nom
+rahatlattı rahatla+Verb^DB+Verb+Caus+Pos+Past+A3sg
+</S> </S>+ESTag
+</TITLE> </TITLE>+ETTag
+<S> <S>+BSTag
+Geçen geçen+Adj geç+Verb+Pos^DB+Adj+PresPart Geçen+Noun+Prop+A3sg+Pnon+Nom
+hafta hafta+Noun+A3sg+Pnon+Nom
+kısa kısa+Adj kıs+Verb+Pos+Opt+A3sg
+vadeli vade+Noun+A3sg+Pnon+Nom^DB+Adj+With
+avans avans+Noun+A3sg+Pnon+Nom
+hesabına hesap+Noun+A3sg+P3sg+Dat hesap+Noun+A3sg+P2sg+Dat
+48.7 48.7+Num+Real
+trilyon trilyon+Num+Card
+liralık lira+Noun+A3sg+Pnon+Nom^DB+Adj+FitFor lira+Noun+A3sg+Pnon+Nom^DB+Noun+Ness+A3sg+Pnon+Nom
+geri geri+Adj geri+Adverb geri+Noun+A3sg+Pnon+Dat geri+Noun+A3sg+Pnon+Nom
+ödeme ödeme+Noun+A3sg+Pnon+Nom öde+Verb+Neg+Imp+A2sg öde+Verb+Pos^DB+Noun+Inf2+A3sg+Pnon+Nom ödem+Noun+A3sg+Pnon+Dat
+yapan yap+Verb+Pos^DB+Adj+PresPart
+Hazine hazine+Noun+A3sg+Pnon+Nom hazin+Adj^DB+Noun+Zero+A3sg+Pnon+Dat Hazine+Noun+Prop+A3sg+Pnon+Nom
+Merkez merkez+Noun+A3sg+Pnon+Nom
+Bankası'nı Banka+Noun+Prop+A3sg+P3sg+Acc
+rahatlattı rahatla+Verb^DB+Verb+Caus+Pos+Past+A3sg
+</S> </S>+ESTag
+<S> <S>+BSTag
+Hazine'nin Hazine+Noun+Prop+A3sg+Pnon+Gen Hazine+Noun+Prop+A3sg+P2sg+Gen Hazine+Noun+Prop+A3sg+P2sg+Gen
+kullanabileceği kullan+Verb+Pos^DB+Verb+Able^DB+Adj+FutPart+P3sg kullan+Verb+Pos^DB+Verb+Able^DB+Noun+FutPart+A3sg+P3sg+Nom kul+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos^DB+Verb+Able^DB+Adj+FutPart+P3sg kul+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos^DB+Verb+Able^DB+Noun+FutPart+A3sg+P3sg+Nom
+avans avans+Noun+A3sg+Pnon+Nom
+69.1 69.1+Num+Real
+trilyona trilyon+Num+Card^DB+Noun+Zero+A3sg+Pnon+Dat
+çıkarken çık+Verb+Pos+Aor^DB+Adverb+While çıkar+Noun+A3sg+Pnon+Nom^DB+Verb+Zero^DB+Adverb+While
+, ,+Punc
+döviz döviz+Noun+A3sg+Pnon+Nom
+rezervlerinde rezerv+Noun+A3pl+P3sg+Loc rezerv+Noun+A3pl+P2sg+Loc rezerv+Noun+A3pl+P3pl+Loc rezerv+Noun+A3sg+P3pl+Loc
+45 45+Num+Card
+milyon milyon+Num+Card
+dolarlık dolar+Noun+A3sg+Pnon+Nom^DB+Adj+FitFor dol+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Ness+A3sg+Pnon+Nom dola+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Ness+A3sg+Pnon+Nom dolar+Noun+A3sg+Pnon+Nom^DB+Noun+Ness+A3sg+Pnon+Nom
+erime eri+Verb+Pos^DB+Noun+Inf2+A3sg+Pnon+Nom er+Noun+A3sg+P1sg+Dat eri+Verb+Neg+Imp+A2sg erim+Noun+A3sg+Pnon+Dat
+gözlendi gözle+Verb^DB+Verb+Pass+Pos+Past+A3sg göz+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos+Past+A3sg
+</S> </S>+ESTag
+<S> <S>+BSTag
+YILBAŞINDAN yılbaş+Noun+A3sg+P3sg+Abl yılbaş+Noun+A3sg+P2sg+Abl
+bu bu+Det bu+Pron+Demons+A3sg+Pnon+Nom
+yana yan+Noun+A3sg+Pnon+Dat yan+Verb+Pos+Opt+A3sg yana+Postp+PCAbl
+Merkez merkez+Noun+A3sg+Pnon+Nom
+Bankası banka+Noun+A3sg+P3sg+Nom banka+Noun^DB+Adj+Almost
+kaynaklarına kaynak+Noun+A3pl+P3sg+Dat kaynakla+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Zero+A3sg+P3sg+Dat kaynakla+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Zero+A3sg+P2sg+Dat kaynak+Noun+A3pl+P3pl+Dat kaynak+Noun+A3sg+P3pl+Dat kaynak+Noun+A3pl+P2sg+Dat
+yüklenen yükle+Verb^DB+Verb+Pass+Pos^DB+Adj+PresPart yük+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos^DB+Adj+PresPart
+Hazine hazine+Noun+A3sg+Pnon+Nom hazin+Adj^DB+Noun+Zero+A3sg+Pnon+Dat Hazine+Noun+Prop+A3sg+Pnon+Nom
+, ,+Punc
+geçen geçen+Adj geç+Verb+Pos^DB+Adj+PresPart
+hafta hafta+Noun+A3sg+Pnon+Nom
+durumunu durum+Noun+A3sg+P3sg+Acc durum+Noun+A3sg+P2sg+Acc
+düzeltti düzel+Verb^DB+Verb+Caus+Pos+Past+A3sg
+</S> </S>+ESTag
+<S> <S>+BSTag
+Geçen geçen+Adj geç+Verb+Pos^DB+Adj+PresPart Geçen+Noun+Prop+A3sg+Pnon+Nom
+hafta hafta+Noun+A3sg+Pnon+Nom
+48.7 48.7+Num+Real
+trilyon trilyon+Num+Card
+liralık lira+Noun+A3sg+Pnon+Nom^DB+Adj+FitFor lira+Noun+A3sg+Pnon+Nom^DB+Noun+Ness+A3sg+Pnon+Nom
+avans avans+Noun+A3sg+Pnon+Nom
+kapatan kapa+Verb^DB+Verb+Caus+Pos^DB+Adj+PresPart
+Hazine hazine+Noun+A3sg+Pnon+Nom hazin+Adj^DB+Noun+Zero+A3sg+Pnon+Dat Hazine+Noun+Prop+A3sg+Pnon+Nom
+kullanabileceği kullan+Verb+Pos^DB+Verb+Able^DB+Adj+FutPart+P3sg kullan+Verb+Pos^DB+Verb+Able^DB+Noun+FutPart+A3sg+P3sg+Nom kul+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos^DB+Verb+Able^DB+Adj+FutPart+P3sg kul+Noun+A3sg+Pnon+Nom^DB+Verb+Acquire+Pos^DB+Verb+Able^DB+Noun+FutPart+A3sg+P3sg+Nom
+kısa kısa+Adj kıs+Verb+Pos+Opt+A3sg
+vadeli vade+Noun+A3sg+Pnon+Nom^DB+Adj+With
+avans avans+Noun+A3sg+Pnon+Nom
+tutarını tutar+Noun+A3sg+P3sg+Acc tut+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Zero+A3sg+P3sg+Acc tut+Verb+Pos+Aor^DB+Adj+Zero^DB+Noun+Zero+A3sg+P2sg+Acc tutar+Noun+A3sg+P2sg+Acc
+da da+Conj
+69.1 69.1+Num+Real
+trilyona trilyon+Num+Card^DB+Noun+Zero+A3sg+Pnon+Dat
+çıkardı çık+Verb^DB+Verb+Caus+Pos+Past+A3sg çık+Verb+Pos+Aor+Past+A3sg çıkar+Noun+A3sg+Pnon+Nom^DB+Verb+Zero+Past+A3sg
+</S> </S>+ESTag
+</DOC> </DOC>+EDTag

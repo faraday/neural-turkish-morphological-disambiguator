@@ -81,16 +81,16 @@ def sample_generator(sentences, label2ids, batch_size=32, return_sentence=False)
 
 def load_label2ids_and_params(args):
     if args.label2ids_path:
-        with open(args.label2ids_path, "r") as f:
+        with open(args.label2ids_path, "rb") as f:
             label2ids = cPickle.load(f)
     else:
         if os.path.exists(args.model_path + ".label2ids"):
-            with open(args.model_path + ".label2ids", "r") as f:
+            with open(args.model_path + ".label2ids", "rb") as f:
                 label2ids = cPickle.load(f)
         else:
             train_and_test_sentences, label2ids = read_datafile(args.train_filepath,
                                                                 args.test_filepath)
-            with open(args.model_path + ".label2ids", "w") as f:
+            with open(args.model_path + ".label2ids", "wb") as f:
                 cPickle.dump(label2ids, f)
             params = create_params(label2ids)
             return label2ids, params, train_and_test_sentences
@@ -134,15 +134,15 @@ def disambiguate_single_line_sentence(line, model, label2ids, params, print_pred
     # print(type(string_output_single_line)
     fd, f_path = tempfile.mkstemp()
     with codecs.open(f_path, "w", encoding="utf8") as f:
-        f.write(analyzer_output_string.decode("iso-8859-9"))
+        f.write(analyzer_output_string)
     os.close(fd)
     # print(f_path
     train_and_test_sentences, _ = read_datafile(f_path, f_path, preloaded_label2ids=label2ids)
     # print(train_and_test_sentences[1]
-    sample_batch, decoded_sample_batch = iter(sample_generator(train_and_test_sentences[1],
+    sample_batch, decoded_sample_batch = next(sample_generator(train_and_test_sentences[1],
                              label2ids,
                              batch_size=params.batch_size,
-                             return_sentence=True)).next()
+                             return_sentence=True))
     # for batch_idx, (sample_batch, decoded_sample_batch) in enumerate(sample_generator(train_and_test_sentences[1],
     #                          label2ids,
     #                          batch_size=params.batch_size,
@@ -265,7 +265,7 @@ if __name__ == "__main__":
         model.fit_generator(sample_generator(train_and_test_sentences[0], label2ids, batch_size=params.batch_size),
                             steps_per_epoch=len(train_and_test_sentences[0])/params.batch_size/params.n_subepochs,
                             epochs=1*params.n_subepochs,
-                            validation_data=sample_generator(train_and_test_sentences[1], label2ids, batch_size=params.batch_size),
+                            validation_data=next(sample_generator(train_and_test_sentences[1], label2ids, batch_size=params.batch_size)),
                             validation_steps=len(train_and_test_sentences[1])/params.batch_size+1,
                             callbacks=[checkpointer, tensorboard_callback, reduce_lr])
 

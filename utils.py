@@ -194,20 +194,17 @@ def get_morph_analyzes(line):
     :param line: 
     :return: 
     """
-    if type(line) == unicode:
-        tokens = tokenize(line)
-    else:
-        tokens = tokenize(line.decode("utf8"))
+    tokens = tokenize(line)
     # print tokens
     fd, f_path = tempfile.mkstemp()
-    with open(f_path, "w") as f:
+    with codecs.open(f_path, "w", encoding="iso-8859-9") as f:
         for token in tokens:
-            f.write(token.encode("iso-8859-9") + "\n")
+            f.write(token + "\n")
     os.close(fd)
     with codecs.open(f_path, "r", encoding="iso-8859-9") as f:
-        string_output = subprocess.check_output(["./bin/lookup", "-latin1", "-f",
+        string_output = subprocess.check_output(["./lookup", "-latin1", "-f",
                                                  "tfeatures.scr"], stdin=f, cwd="./tools/tr-tagger")
-    return string_output
+    return bytes(string_output).decode('utf8')
 
 def calculate_ambiguity_score_of_a_sentence(line):
     morph_analyzes_output = get_morph_analyzes(line)
